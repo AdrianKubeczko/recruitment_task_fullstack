@@ -32,6 +32,10 @@ class ExchangeRatesService
      */
     public function getExchangeRates(string $date, array $currencies): array
     {
+        if (!is_array($currencies)) {
+            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Currencies parameter must be an array.');
+        }
+
         if (!DateHelper::isValidDate($date)) {
             throw new HttpException(Response::HTTP_BAD_REQUEST, 'Invalid date format or date is older than 2023.');
         }

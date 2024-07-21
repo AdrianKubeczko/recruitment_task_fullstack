@@ -31,13 +31,6 @@ class ExchangeRatesController extends AbstractController
         $date = $request->query->get('date');
         $currencies = $request->query->get('currencies', []);
 
-        if (!is_array($currencies)) {
-            return new JsonResponse([
-                'message' => 'Currencies parameter must be an array.',
-                'code' => Response::HTTP_BAD_REQUEST,
-            ], Response::HTTP_BAD_REQUEST);
-        }
-
         // 5.
         try {
             $data = $this->exchangeRatesService->getExchangeRates($date, $currencies);
